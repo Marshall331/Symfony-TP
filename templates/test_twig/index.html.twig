@@ -1,0 +1,27 @@
+<DOCTYPE html>
+
+	<html lang="en">
+		<body>
+			<h1>
+				{{title | capitalize }}
+			</h1>
+			<ul>
+				{% for user in users %}
+					<li>{{user.full_name}}
+						a
+						{{user.age}}
+						ans donc cette personne est ...
+						<strong>
+							{% if user.age >= 18 %}
+								majeure
+							{% elseif user.age <= 10 %}
+								enfant
+							{% else %}
+								mineure
+							{% endif %}
+						</strong>
+					</li>
+				{% endfor %}
+			</ul>
+		</body>
+	</html>
