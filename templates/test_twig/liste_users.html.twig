@@ -1,0 +1,25 @@
+<div class="d-flex flex-wrap gap-4 m-4">
+	{% for user in users %}
+		<div>
+			<img src="https://picsum.photos/200?image={{ user.image }}"> <br>
+			{{user.full_name}}
+			<br>
+			Cette personne a
+			{{user.age}}
+			donc elle est ...
+			<b>
+				{% if user.age >= 18 %}
+					majeure
+				{% elseif user.age <= 10 %}
+					enfant
+				{% else %}
+					mineure
+				{% endif %}
+			</b>
+			<br>Créé le
+			{{user.createdAt |date("d/m/Y")}}
+			<br>
+			<a class="btn btn-outline-info w-100" href="#">Détail</a>
+		</div>
+	{% endfor %}
+</div>
