@@ -6,6 +6,7 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use DateTime;
 
 class BlogFixtures extends Fixture
 {
@@ -20,9 +21,8 @@ class BlogFixtures extends Fixture
 
             $user->setFullName($faker->firstName())
             ->setEmail($faker->email())
-            ->setPassword($faker->password());
-            // ->setCre
-            // ->set
+            ->setPassword($faker->password())
+            ->setCreatedAt(new DateTime);
 
 
             // $manager->persist($user);
