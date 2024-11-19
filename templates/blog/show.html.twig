@@ -1,0 +1,72 @@
+{% extends 'layout_blog.html.twig' %}
+
+{% block title %}
+	Détails d'un article
+{% endblock %}
+
+{% block body %}
+
+	<a href="{{ path('app_blog_index') }}" class="btn btn-outline-primary">
+		&nbsp;Retour à la liste des articles
+	</a>
+	<h1 class="text-center mb-3">Article n°{{article.id}}</h1>
+
+	<div class="card-body">
+		<div class="row justify-content-center">
+			<div class="qcm view content"><br>
+				<table class='table table-striped'>
+					<tr>
+						<th>Id</th>
+						<td>
+							{{article.id}}
+						</td>
+					</tr>
+					<tr>
+						<th>Title</th>
+						<td>
+							{{article.title}}
+						</td>
+					</tr>
+					<tr>
+						<th>Image</th>
+						<td>
+							<img src={{ article.imageUrl }} width="100" height="100">
+						</td>
+					</tr>
+					<tr>
+						<th>CreatedAt :</th>
+						<td>{{ article.createdAt|date('d/m/Y') }}</td>
+					</tr>
+					<tr>
+						<th>UpdatedAt :</th>
+						<td>{{ article.updatedAt|date('d/m/Y') }}</td>
+					</tr>
+					<tr>
+						<th>Name Author</th>
+						<td>
+							{{article.user.fullName}}
+						</td>
+					</tr>
+					<tr>
+						<th>Email Author</th>
+						<td>
+							{{article.user.email}}
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="d-flex w-100">
+			<div>
+				<b>Name Category :
+				</b>
+				{{article.categories[0].name}}
+			</div>
+			<div class="ms-4">
+				<b>Description Category :
+				</b>
+				{{article.categories[0].description}}
+			</div>
+		</div>
+	</div>
+</div>{% endblock %}

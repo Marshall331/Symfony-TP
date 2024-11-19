@@ -97,9 +97,10 @@ class BlogFixtures extends Fixture
 
             $article->setTitle($faker->word())
                 ->setContent($faker->sentence(2))
-                ->setImageUrl($faker->imageUrl())
+                ->setImageUrl("https://picsum.photos/200?image=" . $faker->numberBetween(100, 500))
                 ->setCreatedAt(new \DatetimeImmutable())
-                ->setUser($faker->randomElement($users));
+                ->setUser($faker->randomElement($users))
+                ->addCategory($faker->randomElement($categories));
 
             $manager->persist($article);
             $articles[] = $article;
