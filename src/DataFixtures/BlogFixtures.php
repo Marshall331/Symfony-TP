@@ -85,13 +85,6 @@ class BlogFixtures extends Fixture
 
             $manager->persist($categorie);
             $categories[] = $categorie;
-            ->setEmail($faker->email())
-            ->setPassword($faker->password())
-            ->setCreatedAt(new DateTime);
-
-
-            // $manager->persist($user);
-            // $users[] = $user;
         }
         $manager->flush();
 
