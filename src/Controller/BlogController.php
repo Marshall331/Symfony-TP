@@ -31,13 +31,13 @@ class BlogController extends AbstractController
         );
     }
 
-    #[Route('/{id}', name: 'app_blog_show', methods: ['GET'])]
-    public function show(Article $article): Response
+    #[Route('/{slug}', name: 'app_blog_show', methods: ['GET'])]
+    public function show(ArticleRepository $articleRepository, String $slug): Response
     {
         return $this->render(
             'blog/show.html.twig',
             [
-                'article' => $article
+                'article' => $articleRepository->findOneBySlug($slug)
             ]
         );
     }

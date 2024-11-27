@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -41,6 +42,9 @@ class Article
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'articles')]
     private Collection $categories;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -58,8 +62,10 @@ class Article
 
     public function setTitle(string $title): static
     {
-        $this->title = $title;
-
+        $this->title = $title;  
+        $slugify = new Slugify();
+        $this->slug = $slugify->slugify($this->title);
+        
         return $this;
     }
 
@@ -143,6 +149,18 @@ class Article
     public function removeCategory(Category $category): static
     {
         $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }

@@ -5,14 +5,19 @@
 {% endblock %}
 
 {% block body %}
-	<h1 class="text-center">Liste des articles du Blog</h1>
-
-	<a href="{{ path('app_blog_new') }}" class="btn btn-outline-primary">Create new</a>
+	<div class="text-center">
+		<h1>Liste des articles du Blog</h1>
+		<h4>{{articles | length}}
+			articles trouvés
+		</h4>
+	</div>
+	<a href="{{ path('app_blog_new') }}" class="btn btn-outline-primary mb-4">Create new</a>
 
 	<table class="table table-hover text-center">
 		<thead>
 			<tr>
 				<th>id</th>
+				<th>Nb Categories associées</th>
 				<th>Title</th>
 				<th>Author</th>
 				<th>Content</th>
@@ -25,8 +30,9 @@
 			{% for article in articles %}
 				<tr>
 					<td>{{ article.id }}</td>
+					<td>{{ article.categories|length }} catégorie(s) associée(s)</td>
 					<td>
-						<a href="{{ path('app_blog_show', {'id': article.id }) }}">{{ article.title }}</a>
+						<a href="{{ path('app_blog_show', {'slug': article.slug }) }}">{{ article.title }}</a>
 					</td>
 					<td>{{article.user.fullName}}</td>
 					<td>{{ article.content }}</td>
@@ -35,7 +41,7 @@
 					</td>
 					<td>{{ article.createdAt|date('d/m/Y') }}</td>
 					<td>
-						<a href="{{ path('app_blog_show', {'id': article.id }) }}" class="btn btn-outline-secondary">show</a>
+						<a href="{{ path('app_blog_show', {'slug': article.slug }) }}" class="btn btn-outline-secondary">show</a>
 						<a href="{{ path('app_blog_indexOld', {'id': article.id, 'nom': 'blablabla' }) }}" class="btn btn-outline-info">edit</a>
 					</td>
 				</tr>
