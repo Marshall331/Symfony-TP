@@ -95,13 +95,13 @@ class BlogFixtures extends Fixture
 
             $article = new Article();
 
-            $article->setTitle($faker->sentence(1))
-                ->setContent($faker->sentence(2))
+            $article->setTitle($faker->word())
+                ->setContent($faker->sentence())
                 ->setImageUrl("https://picsum.photos/200?image=" . $faker->numberBetween(100, 500))
                 ->setCreatedAt(new \DatetimeImmutable())
                 ->setUser($faker->randomElement($users));
 
-            for ($i = 0; $i < $faker->numberBetween(1, 3); $i++) {
+            for ($j = 0; $j < $faker->numberBetween(1, 3); $j++) {
                 $article->addCategory($faker->randomElement($categories));
             }
 

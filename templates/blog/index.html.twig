@@ -30,9 +30,10 @@
 			{% for article in articles %}
 				<tr>
 					<td>{{ article.id }}</td>
-					<td>{{ article.categories|length }} catégorie(s) associée(s)</td>
+					<td>{{ article.categories|length }}
+						catégorie(s) associée(s)</td>
 					<td>
-						<a href="{{ path('app_blog_show', {'slug': article.slug }) }}">{{ article.title }}</a>
+						<a href="{{ path('app_blog_show_slug', {'slug': article.slug }) }}">{{ article.title }}</a>
 					</td>
 					<td>{{article.user.fullName}}</td>
 					<td>{{ article.content }}</td>
@@ -41,7 +42,7 @@
 					</td>
 					<td>{{ article.createdAt|date('d/m/Y') }}</td>
 					<td>
-						<a href="{{ path('app_blog_show', {'slug': article.slug }) }}" class="btn btn-outline-secondary">show</a>
+						<a href="{{ path('app_blog_show_slug', {'slug': article.slug }) }}" class="btn btn-outline-secondary">show</a>
 						<a href="{{ path('app_blog_indexOld', {'id': article.id, 'nom': 'blablabla' }) }}" class="btn btn-outline-info">edit</a>
 					</td>
 				</tr>
@@ -51,5 +52,5 @@
 				</tr>
 			{% endfor %}
 		</tbody>
-	</tbody>
-</table>{% endblock %}
+	</table>
+{% endblock %}
