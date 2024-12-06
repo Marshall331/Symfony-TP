@@ -9,11 +9,15 @@
 	<a href="{{ path('app_blog_index') }}" class="btn btn-outline-primary">
 		&nbsp;Retour à la liste des articles
 	</a>
-	<h1 class="text-center mb-3">Article n°{{article.id}}</h1>
+	<a href="{{ path('app_blog_edit', {'id': article.id }) }}" class="btn btn-outline-info">Modifier l'article</a>
+	<hr>
+
+	<h1 class="text-center">Détail de l'article
+		{{article.title}}</h1>
 
 	<div class="card-body">
 		<div class="row justify-content-center">
-			<div class="view content"><br>
+			<div class="qcm view content"><br>
 				<table class='table table-striped'>
 					<tr>
 						<th>Id</th>
@@ -57,21 +61,35 @@
 			</div>
 		</div>
 
-		<table class='table table-striped'>
+		<table class="table">
+			<h2 class="text-center mt-2">Catégorie(s) associée(s)</h2>
 			<thead>
-				<th>Name Category :</th>
-				<th>Description Category :</th>
-				<th>Image Category :</th>
+				<tr>
+					<th>Nom</th>
+					<th>Description</th>
+					<th>Image</th>
+				</tr>
 			</thead>
 			<tbody>
-				{% for category in article.categories %}
+				{% for categorie in article.categories %}
 					<tr>
-						<td>{{category.name}}</td>
-						<td>{{category.description}}</td>
-						<td><img src={{ category.imageUrl }} width="100" height="100"></td>
+
+						<td>
+							<a href="{{ path('app_blog_show', {'slug': categorie.id }) }}">
+								{{categorie.name}}
+							</a>
+						</td>
+						<td>{{categorie.description}}</td>
+						<td>
+							<img src={{categorie.imageUrl}} width="100" height="100">
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="8">Aucune catégorie</td>
 					</tr>
 				{% endfor %}
 			</tbody>
 		</table>
 	</div>
-</div>{% endblock %}
+{% endblock %}
