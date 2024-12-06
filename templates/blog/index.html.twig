@@ -44,17 +44,15 @@
 					<td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 					<td>{{ article.updatedAt ? article.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 					<td class="text-nowrap">
-						<a href="{{ path('app_blog_show', {'slug': article.slug }) }}" class="btn btn-outline-secondary">show</a>
-						<a href="{{ path('app_blog_edit', {'id': article.id }) }}" class="btn btn-outline-info">edit</a>
+						<a href="{{ path('app_blog_edit', {'id': article.id }) }}" class="btn btn-outline-info">modifier</a>
+						<a href="{{ path('app_blog_show', {'slug': article.slug }) }}" class="btn btn-outline-secondary">détail</a>
 					</td>
 				</tr>
 			{% else %}
 				<tr>
-					<td colspan="8">no records found</td>
+					<td colspan="8">Aucun article trouvé</td>
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
-
-	<a href="{{ path('app_blog_new') }}">Create new</a>
 {% endblock %}

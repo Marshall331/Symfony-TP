@@ -30,6 +30,8 @@ final class BlogController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $article->setCreatedAt(new \DateTimeImmutable());
+
             $entityManager->persist($article);
             $entityManager->flush();
 
@@ -57,9 +59,11 @@ final class BlogController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $article->setUpdatedAt(new \DateTimeImmutable());
+
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_blog_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_blog_show', ['slug' => $article->getSlug()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('blog/edit.html.twig', [

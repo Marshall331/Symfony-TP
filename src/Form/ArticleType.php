@@ -35,13 +35,6 @@ class ArticleType extends AbstractType
                 'label' => 'Url de l\'image',
                 'attr' => ['class' => 'form-control mt-2'],
             ])
-            ->add('createdAt', DateType::class, [
-                'widget' => 'single_text',
-                'label' => 'Date d\'ouverture :',
-                'label_attr' => ['class' => 'form-label'],
-                'attr' => ['class' => 'form-control mb-2'],
-                'required' => false,
-            ])
             ->add('User', EntityType::class, [
                 'class' => User::class,
                 'label' => 'Auteur',
