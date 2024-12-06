@@ -46,12 +46,12 @@
 					<td class="text-nowrap">
 						<a href="{{ path('app_blog_edit', {'id': article.id }) }}" class="btn btn-outline-info">modifier</a>
 						<a href="{{ path('app_blog_show', {'slug': article.slug }) }}" class="btn btn-outline-secondary">détail</a>
-					    {{ include('category/_delete_form.html.twig') }}
+					    {{ include('article/_delete_form.html.twig') }}
 					</td>
 				</tr>
 			{% else %}
-				<tr>
-					<td colspan="8">Aucun article trouvé</td>
+				<tr class="text-center">
+					<td colspan="9">Aucun article trouvé</td>
 				</tr>
 			{% endfor %}
 		</tbody>

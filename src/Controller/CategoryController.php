@@ -26,11 +26,7 @@ final class CategoryController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $category = new Category();
-<<<<<<< HEAD
-        $form = $this->createForm(Category1Type::class, $category);
-=======
         $form = $this->createForm(CategoryType::class, $category);
->>>>>>> 4a81d61a8900edf5f02fe6acdad7840245a40adf
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -57,11 +53,7 @@ final class CategoryController extends AbstractController
     #[Route('/{id}/edit', name: 'app_category_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
-<<<<<<< HEAD
-        $form = $this->createForm(Category1Type::class, $category);
-=======
         $form = $this->createForm(CategoryType::class, $category);
->>>>>>> 4a81d61a8900edf5f02fe6acdad7840245a40adf
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
