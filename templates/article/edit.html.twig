@@ -9,12 +9,16 @@
 	<a href="{{ path('app_article_index') }}" class="btn btn-outline-primary">
 		&nbsp;Retour à la liste des articles
 	</a>
+	<hr>
+
+	<div class="d-flex justify-content-between">
 	<a href="{{ path('app_article_show', {'slug': article.slug }) }}" class="btn btn-outline-info">Détail de l'article</a>
-	
-    <hr>
+		{{ include('article/_delete_form.html.twig') }}
+	</div>
+
 	<h1 class="text-center">Modifier un article</h1>
 
-    {{ include('article/_form.html.twig', {'button_label': 'Modifier'}) }}
+	{{ include('article/_form.html.twig', {'button_label': 'Modifier'}) }}
 
 
 {% endblock %}

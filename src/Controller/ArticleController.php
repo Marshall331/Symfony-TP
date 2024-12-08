@@ -35,6 +35,7 @@ final class ArticleController extends AbstractController
             $entityManager->persist($article);
             $entityManager->flush();
 
+            $this->addFlash('success', message: 'L\'article a bien été créé !');
             return $this->redirectToRoute('app_article_show', ['slug' => $article->getSlug()], Response::HTTP_SEE_OTHER);
         }
 
@@ -62,7 +63,7 @@ final class ArticleController extends AbstractController
             $article->setUpdatedAt(new \DateTimeImmutable());
 
             $entityManager->flush();
-
+            $this->addFlash('success', message: 'L\'article a bien été modifié !');
             return $this->redirectToRoute('app_article_show', ['slug' => $article->getSlug()], Response::HTTP_SEE_OTHER);
         }
 
@@ -80,6 +81,7 @@ final class ArticleController extends AbstractController
             $entityManager->flush();
         }
 
+        $this->addFlash('success', message: 'L\'article a bien été supprimé !');
         return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
     }
 }

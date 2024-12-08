@@ -21,6 +21,7 @@ class ArticleType extends AbstractType
             ->add('title', TextType::class, options: [
                 'label' => 'Titre',
                 'attr' => ['class' => 'form-control mt-2'],
+                'required' => false,
             ])
             ->add('content', TextareaType::class, [
                 'label' => 'Contenu',

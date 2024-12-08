@@ -34,13 +34,13 @@
 			</div>
 		{% endfor %}
 		{% if form.categories|length > 0 %}
-			<a href="#" class="btn btn-outline-dark">
+			<a href="{{ path('app_category_new') }}" class="btn btn-outline-dark">
 				<i class="fa-solid fa-plus fa-2xl me-2"></i>Ajouter des catégories
 			</a>
 		{% else %}
 			<div class="alert alert-warning">
 				Aucune catégorie trouvé.
-				<a href="#" class="btn btn-outline-dark">
+				<a href="{{ path('app_category_new') }}" class="btn btn-outline-dark">
 					<i class="fa-solid fa-plus fa-2xl me-2"></i>Créer des catégories
 				</a>
 			</div>

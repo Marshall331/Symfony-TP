@@ -43,9 +43,9 @@
 					</td>
 					<td>{{ article.createdAt ? article.createdAt|date('d-m-Y H:i:s') : '' }}</td>
 					<td>{{ article.updatedAt ? article.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
-					<td class="text-nowrap">
-						<a href="{{ path('app_article_edit', {'id': article.id }) }}" class="btn btn-outline-info">modifier</a>
-						<a href="{{ path('app_article_show', {'slug': article.slug }) }}" class="btn btn-outline-secondary">détail</a>
+					<td class="gap-2">
+						<a href="{{ path('app_article_show', {'slug': article.slug }) }}" class="btn btn-outline-secondary me-1 mb-1">détail</a>
+						<a href="{{ path('app_article_edit', {'id': article.id }) }}" class="btn btn-outline-info me-1 mb-1">modifier</a>
 						{{ include('article/_delete_form.html.twig') }}
 					</td>
 				</tr>

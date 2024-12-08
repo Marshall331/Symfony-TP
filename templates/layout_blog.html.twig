@@ -13,9 +13,9 @@
 		<link
 		rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/cosmo/bootstrap.min.css"/>
 	<!-- 
-				            Optionally, include some custom styles 
-						    <link rel="stylesheet" href="{{ asset('css/style.css') }}"> {% block stylesheets %}{% endblock %}
-				        -->
+					            Optionally, include some custom styles 
+							    <link rel="stylesheet" href="{{ asset('css/style.css') }}"> {% block stylesheets %}{% endblock %}
+					        -->
 	</head>
 	<body
 		class="d-flex flex-column min-vh-100">
@@ -30,7 +30,7 @@
 		<!-- Menu / Navbar -->
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 			<div class="container-fluid container">
-				<a class="navbar-brand" href="{{ path('app_home') }}" >Mon Site</a>
+				<a class="navbar-brand" href="{{ path('app_home') }}">Mon Site</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -43,7 +43,7 @@
 							<a class="nav-link {% if app.request.attributes.get('_controller') starts with 'App\\Controller\\ArticleController' %}active{% endif %}" href="{{ path('app_article_index') }}">
 								Articles
 							</a>
-						</li>	
+						</li>
 						<li class="nav-item">
 							<a class="nav-link {% if app.request.attributes.get('_controller') starts with 'App\\Controller\\CategoryController' %}active{% endif %}" href="{{ path('app_category_index') }}">
 								Catégories
@@ -56,6 +56,15 @@
 
 		<!-- Contenu principal -->
 		<main class="container my-3 flex-grow-1">
+			{% for type, messages in app.flashes %}
+				<div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+					{% for message in messages %}
+						{{ message }}
+					{% endfor %}
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+			{% endfor %}
+			
 			{% block body %}
 				<div class="row">
 					<div class="col-md-12">

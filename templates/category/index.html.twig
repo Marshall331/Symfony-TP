@@ -34,9 +34,10 @@
 					<td>{{ category.imageUrl }}</td>
 					<td>{{ category.createdAt ? category.createdAt|date('d-m-Y H:i:s') : '' }}</td>
 					<td>{{ category.updatedAt ? category.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
-					<td>
-						<a href="{{ path('app_category_edit', {'id': category.id}) }}">modifier</a>
-						<a href="{{ path('app_category_show', {'id': category.id}) }}">détail</a>
+					<td class="text-nowrap">
+						<a href="{{ path('app_category_show', {'id': category.id}) }}" class="btn btn-outline-secondary me-1 mb-1">détail</a>
+						<a href="{{ path('app_category_edit', {'id': category.id }) }}" class="btn btn-outline-info me-1 mb-1">modifier</a>
+						{{ include('category/_delete_form.html.twig') }}
 					</td>
 				</tr>
 			{% else %}

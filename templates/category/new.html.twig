@@ -1,11 +1,18 @@
-<!DOCTYPE html>
+{% extends 'layout_blog.html.twig' %}
 
-<title>New Category</title>
+{% block title %}
+	Créer un catégorie
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Category</h1>
 
-    {{ include('category/_form.html.twig') }}
+	<a href="{{ path('app_category_index') }}" class="btn btn-outline-primary">
+		&nbsp;Retour à la liste des catégorie
+	</a>
 
-    <a href="{{ path('app_category_index') }}">back to list</a>
+	<hr>
+	<h1 class="text-center">Créer un catégorie</h1>
+
+	{{ include('category/_form.html.twig') }}
+
 {% endblock %}
