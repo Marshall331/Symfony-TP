@@ -30,20 +30,24 @@
 		<!-- Menu / Navbar -->
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 			<div class="container-fluid container">
-				<a class="navbar-brand" href="#">Mon Site</a>
+				<a class="navbar-brand" href="{{ path('app_home') }}" >Mon Site</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
+						<a class="nav-link {% if app.request.attributes.get('_controller') starts with 'App\\Controller\\HomeController' %}active{% endif %}" href="{{ path('app_home') }}">
+							Accueil
+						</a>
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="#">Accueil</a>
-						</li>
+							<a class="nav-link {% if app.request.attributes.get('_controller') starts with 'App\\Controller\\ArticleController' %}active{% endif %}" href="{{ path('app_blog_index') }}">
+								Articles
+							</a>
+						</li>	
 						<li class="nav-item">
-							<a class="nav-link" href="{{ path('app_blog_index') }}">Articles</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Catégories</a>
+							<a class="nav-link {% if app.request.attributes.get('_controller') starts with 'App\\Controller\\CategoryController' %}active{% endif %}" href="{{ path('app_category_index') }}">
+								Catégories
+							</a>
 						</li>
 					</ul>
 				</div>

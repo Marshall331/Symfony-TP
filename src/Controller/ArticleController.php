@@ -11,8 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/blog')]
-final class BlogController extends AbstractController
+#[Route('/article')]
+final class ArticleController extends AbstractController
 {
     #[Route(name: 'app_blog_index', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository): Response

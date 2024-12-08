@@ -8,7 +8,7 @@
 	<div class="text-center">
 		<h1>Liste des articles du Blog</h1>
 		<h4>{{articles | length}}
-			articles trouvés
+			article(s) trouvé(s)
 		</h4>
 	</div>
 	<a href="{{ path('app_blog_new') }}" class="btn btn-outline-primary mb-4">Create new</a>
@@ -46,12 +46,12 @@
 					<td class="text-nowrap">
 						<a href="{{ path('app_blog_edit', {'id': article.id }) }}" class="btn btn-outline-info">modifier</a>
 						<a href="{{ path('app_blog_show', {'slug': article.slug }) }}" class="btn btn-outline-secondary">détail</a>
-					    {{ include('category/_delete_form.html.twig') }}
+					    {{ include('blog/_delete_form.html.twig') }}
 					</td>
 				</tr>
 			{% else %}
-				<tr>
-					<td colspan="8">Aucun article trouvé</td>
+				<tr class="text-center">
+					<td colspan="9">Aucun article trouvé</td>
 				</tr>
 			{% endfor %}
 		</tbody>
