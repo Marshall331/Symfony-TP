@@ -1,0 +1,95 @@
+{% extends 'layout_blog.html.twig' %}
+
+{% block title %}
+	Détails d'un article
+{% endblock %}
+
+{% block body %}
+
+	<a href="{{ path('app_blog_index') }}" class="btn btn-outline-primary">
+		&nbsp;Retour à la liste des articles
+	</a>
+	<a href="{{ path('app_blog_edit', {'id': article.id }) }}" class="btn btn-outline-info">Modifier l'article</a>
+	<hr>
+
+	<h1 class="text-center">Détail de l'article
+		{{article.title}}</h1>
+
+	<div class="card-body">
+		<div class="row justify-content-center">
+			<div class="qcm view content"><br>
+				<table class='table table-striped'>
+					<tr>
+						<th>Id</th>
+						<td>
+							{{article.id}}
+						</td>
+					</tr>
+					<tr>
+						<th>Title</th>
+						<td>
+							{{article.title}}
+						</td>
+					</tr>
+					<tr>
+						<th>Image</th>
+						<td>
+							<img src={{ article.imageUrl }} width="100" height="100">
+						</td>
+					</tr>
+					<tr>
+						<th>CreatedAt :</th>
+						<td>{{ article.createdAt|date('d/m/Y') }}</td>
+					</tr>
+					<tr>
+						<th>UpdatedAt :</th>
+						<td>{{ article.updatedAt|date('d/m/Y') }}</td>
+					</tr>
+					<tr>
+						<th>Name Author</th>
+						<td>
+							{{article.user.fullName}}
+						</td>
+					</tr>
+					<tr>
+						<th>Email Author</th>
+						<td>
+							{{article.user.email}}
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<table class="table">
+			<h2 class="text-center mt-2">Catégorie(s) associée(s)</h2>
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Description</th>
+					<th>Image</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for categorie in article.categories %}
+					<tr>
+
+						<td>
+							<a href="{{ path('app_blog_show', {'slug': categorie.id }) }}">
+								{{categorie.name}}
+							</a>
+						</td>
+						<td>{{categorie.description}}</td>
+						<td>
+							<img src={{categorie.imageUrl}} width="100" height="100">
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="8">Aucune catégorie</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

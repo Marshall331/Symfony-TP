@@ -1,0 +1,57 @@
+{{ form_start(form) }}
+
+<div class="form-group mb-3">
+	{{ form_label(form.User) }}
+	{{ form_widget(form.User) }}
+	{{ form_errors(form.User) }}
+</div>
+
+<div class="form-group mb-3">
+	{{ form_label(form.title) }}
+	{{ form_widget(form.title) }}
+	{{ form_errors(form.title) }}
+</div>
+
+<div class="form-group mb-3">
+	{{ form_label(form.content) }}
+	{{ form_widget(form.content) }}
+	{{ form_errors(form.content) }}
+</div>
+
+<div class="form-group mb-3">
+	{{ form_label(form.imageUrl) }}
+	{{ form_widget(form.imageUrl) }}
+	{{ form_errors(form.imageUrl) }}
+</div>
+
+<div class="form-group mb-3">
+	<label class="form-check-label">Catégories associées :</label>
+	<div class="col-12 col-md-auto d-flex flex-wrap align-items-center mt-2">
+		{% for choice in form.categories %}
+			<div class="form-check me-4 mb-2">
+				{{ form_widget(choice) }}
+				{{ form_label(choice) }}
+			</div>
+		{% endfor %}
+		{% if form.categories|length > 0 %}
+			<a href="#" class="btn btn-outline-dark">
+				<i class="fa-solid fa-plus fa-2xl me-2"></i>Ajouter des catégories
+			</a>
+		{% else %}
+			<div class="alert alert-warning">
+				Aucune catégorie trouvé.
+				<a href="#" class="btn btn-outline-dark">
+					<i class="fa-solid fa-plus fa-2xl me-2"></i>Créer des catégories
+				</a>
+			</div>
+		{% endif %}
+	</div>
+	{{ form_errors(form.categories) }}
+</div>
+
+<div class="sticky-bottom mb-4">
+	<button class="btn btn-outline-success sticky w-100" type="submit">{{ button_label|default('Créer') }}</button>
+	<br><br>
+</div>
+
+{{ form_end(form) }}
