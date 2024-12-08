@@ -1,43 +1,49 @@
-<!DOCTYPE html>
+{% extends 'layout_blog.html.twig' %}
 
-<title>Category index</title>
+{% block title %}
+	Les catégories
+{% endblock %}
 
 {% block body %}
-    <h1>Category index</h1>
+	<div class="text-center">
+		<h1>Liste des catégories</h1>
+		<h4>{{categories | length}}
+			catégorie(s) trouvée(s)
+		</h4>
+	</div>
+	<a href="{{ path('app_category_new') }}" class="btn btn-outline-primary mb-4">Créer une catégorie</a>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>ImageUrl</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td>{{ category.id }}</td>
-                <td>{{ category.name }}</td>
-                <td>{{ category.description }}</td>
-                <td>{{ category.imageUrl }}</td>
-                <td>{{ category.createdAt ? category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ category.updatedAt ? category.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_category_show', {'id': category.id}) }}">show</a>
-                    <a href="{{ path('app_category_edit', {'id': category.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_category_new') }}">Create new</a>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Description</th>
+				<th>ImageUrl</th>
+				<th>CreatedAt</th>
+				<th>UpdatedAt</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for category in categories %}
+				<tr>
+					<td>{{ category.id }}</td>
+					<td>{{ category.name }}</td>
+					<td>{{ category.description }}</td>
+					<td>{{ category.imageUrl }}</td>
+					<td>{{ category.createdAt ? category.createdAt|date('d-m-Y H:i:s') : '' }}</td>
+					<td>{{ category.updatedAt ? category.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
+					<td>
+						<a href="{{ path('app_category_edit', {'id': category.id}) }}">modifier</a>
+						<a href="{{ path('app_category_show', {'id': category.id}) }}">détail</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr class="text-center">
+					<td colspan="7">Aucune catégorie trouvé</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 {% endblock %}

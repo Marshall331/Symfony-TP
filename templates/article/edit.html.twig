@@ -6,10 +6,10 @@
 
 {% block body %}
 
-	<a href="{{ path('app_blog_index') }}" class="btn btn-outline-primary">
+	<a href="{{ path('app_article_index') }}" class="btn btn-outline-primary">
 		&nbsp;Retour à la liste des articles
 	</a>
-	<a href="{{ path('app_blog_show', {'slug': article.slug }) }}" class="btn btn-outline-info">Détail de l'article</a>
+	<a href="{{ path('app_article_show', {'slug': article.slug }) }}" class="btn btn-outline-info">Détail de l'article</a>
 	
     <hr>
 
