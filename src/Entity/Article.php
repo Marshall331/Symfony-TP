@@ -34,7 +34,11 @@ class Article
     private ?string $imageUrl = null;
 
     #[ORM\Column]
-    #[Assert\GreaterThanOrEqual('01/01/1950', message: 'La date d\'ouverture ne peut pas être inférieure à aujourd\'hui.')]
+    #[Assert\Range(
+        min: '1950-01-01',
+        max: 'today',
+        notInRangeMessage: 'La date de création doit être comprise entre le 01/01/1950 et aujourd\'hui.'
+    )]    
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
