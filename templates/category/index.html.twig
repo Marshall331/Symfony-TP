@@ -5,13 +5,16 @@
 {% endblock %}
 
 {% block body %}
+
+	<a href="{{ path('app_category_new') }}" class="btn btn-outline-primary">Créer une catégorie</a>
+	<hr>
+
 	<div class="text-center">
 		<h1>Liste des catégories</h1>
 		<h4>{{categories | length}}
 			catégorie(s) trouvée(s)
 		</h4>
 	</div>
-	<a href="{{ path('app_category_new') }}" class="btn btn-outline-primary mb-4">Créer une catégorie</a>
 
 	<table class="table">
 		<thead>

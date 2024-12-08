@@ -5,13 +5,16 @@
 {% endblock %}
 
 {% block body %}
+
+	<a href="{{ path('app_article_new') }}" class="btn btn-outline-primary">Créer un article</a>
+	<hr>
+
 	<div class="text-center">
 		<h1>Liste des articles</h1>
 		<h4>{{articles | length}}
 			article(s) trouvé(s)
 		</h4>
 	</div>
-	<a href="{{ path('app_article_new') }}" class="btn btn-outline-primary mb-4">Créer un article</a>
 
 	<table class="table">
 		<thead>
