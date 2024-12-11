@@ -13,9 +13,9 @@
 		<link
 		rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/cosmo/bootstrap.min.css"/>
 	<!-- 
-					            Optionally, include some custom styles 
-							    <link rel="stylesheet" href="{{ asset('css/style.css') }}"> {% block stylesheets %}{% endblock %}
-					        -->
+														            Optionally, include some custom styles 
+																    <link rel="stylesheet" href="{{ asset('css/style.css') }}"> {% block stylesheets %}{% endblock %}
+														        -->
 	</head>
 	<body
 		class="d-flex flex-column min-vh-100">
@@ -49,8 +49,30 @@
 								Catégories
 							</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link {% if app.request.attributes.get('_controller') starts with 'App\\Controller\\RegistrationController' %}active{% endif %}" href="{{ path('app_register') }}">
+								Register
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link {% if app.request.attributes.get('_route') == 'app_login' %}active{% endif %}" href="{{ path('app_login') }}">
+								Login
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_logout') }}">
+								Logout
+							</a>
+						</li>
 					</ul>
 				</div>
+				{% if is_granted('ROLE_ADMIN') %}
+					<span class="badge bg-danger">Connecté en tant que administrateur</span>
+				{% elseif is_granted('ROLE_USER') %}
+					<span class="badge bg-success">Vous êtes connecté</span>
+				{% else %}
+					<span class="badge bg-info">Vous n'êtes pas connecté</span>
+				{% endif %}
 			</div>
 		</nav>
 
@@ -64,7 +86,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				</div>
 			{% endfor %}
-			
+
 			{% block body %}
 				<div class="row">
 					<div class="col-md-12">

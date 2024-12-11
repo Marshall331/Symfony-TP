@@ -6,7 +6,9 @@
 
 {% block body %}
 
-	<a href="{{ path('app_article_new') }}" class="btn btn-outline-primary">Créer un article</a>
+	{% if is_granted('ROLE_USER') %}
+		<a href="{{ path('app_article_new') }}" class="btn btn-outline-primary">Créer un article</a>
+	{% endif %}
 	<hr>
 
 	<div class="text-center">
@@ -47,9 +49,13 @@
 					<td>{{ article.createdAt ? article.createdAt|date('d-m-Y H:i:s') : '' }}</td>
 					<td>{{ article.updatedAt ? article.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
 					<td class="gap-2">
+						{% if is_granted('ROLE_USER') %}
+							<a href="{{ path('app_article_edit', {'id': article.id }) }}" class="btn btn-outline-info me-1 mb-1">modifier</a>
+						{% endif %}
 						<a href="{{ path('app_article_show', {'slug': article.slug }) }}" class="btn btn-outline-secondary me-1 mb-1">détail</a>
-						<a href="{{ path('app_article_edit', {'id': article.id }) }}" class="btn btn-outline-info me-1 mb-1">modifier</a>
-						{{ include('article/_delete_form.html.twig') }}
+						{% if is_granted('ROLE_ADMIN') %}
+							{{ include('article/_delete_form.html.twig') }}
+						{% endif %}
 					</td>
 				</tr>
 			{% else %}

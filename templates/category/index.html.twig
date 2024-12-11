@@ -6,7 +6,9 @@
 
 {% block body %}
 
-	<a href="{{ path('app_category_new') }}" class="btn btn-outline-primary">Créer une catégorie</a>
+	{% if is_granted('ROLE_USER') %}
+		<a href="{{ path('app_category_new') }}" class="btn btn-outline-primary">Créer une catégorie</a>
+	{% endif %}
 	<hr>
 
 	<div class="text-center">
@@ -38,9 +40,13 @@
 					<td>{{ category.createdAt ? category.createdAt|date('d-m-Y H:i:s') : '' }}</td>
 					<td>{{ category.updatedAt ? category.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
 					<td class="text-nowrap">
+						{% if is_granted('ROLE_USER') %}
+							<a href="{{ path('app_category_edit', {'id': category.id }) }}" class="btn btn-outline-info me-1 mb-1">modifier</a>
+						{% endif %}
 						<a href="{{ path('app_category_show', {'id': category.id}) }}" class="btn btn-outline-secondary me-1 mb-1">détail</a>
-						<a href="{{ path('app_category_edit', {'id': category.id }) }}" class="btn btn-outline-info me-1 mb-1">modifier</a>
-						{{ include('category/_delete_form.html.twig') }}
+						{% if is_granted('ROLE_ADMIN') %}
+							{{ include('category/_delete_form.html.twig') }}
+						{% endif %}
 					</td>
 				</tr>
 			{% else %}
