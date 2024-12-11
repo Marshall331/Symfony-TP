@@ -1,13 +1,26 @@
-<!DOCTYPE html>
+{% extends 'layout_blog.html.twig' %}
 
-<title>Edit Category</title>
+{% block title %}
+	Modifier une catégorie
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Category</h1>
 
-    {{ include('category/_form.html.twig', {'button_label': 'Update'}) }}
+	<a href="{{ path('app_category_index') }}" class="btn btn-outline-primary">
+		&nbsp;Retour à la liste des catégories
+	</a>
+	<hr>
 
-    <a href="{{ path('app_category_index') }}">back to list</a>
+	<div class="d-flex justify-content-between">
+		<a href="{{ path('app_category_show', {'id': category.id }) }}" class="btn btn-outline-info">Détail de la catégorie</a>
+		{% if is_granted('ROLE_ADMIN') %}
+			{{ include('category/_delete_form.html.twig') }}
+		{% endif %}
+	</div>
 
-    {{ include('category/_delete_form.html.twig') }}
+	<h1 class="text-center">Modifier une catégorie</h1>
+
+	{{ include('category/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+
 {% endblock %}

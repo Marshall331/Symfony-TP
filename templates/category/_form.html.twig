@@ -1,4 +1,26 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+<div class="form-group mb-3">
+	{{ form_label(form.name) }}
+	{{ form_widget(form.name) }}
+	{{ form_errors(form.name) }}
+</div>
+
+<div class="form-group mb-3">
+	{{ form_label(form.description) }}
+	{{ form_widget(form.description) }}
+	{{ form_errors(form.description) }}
+</div>
+
+<div class="form-group mb-3">
+	{{ form_label(form.imageUrl) }}
+	{{ form_widget(form.imageUrl) }}
+	{{ form_errors(form.imageUrl) }}
+</div>
+
+<div class="sticky-bottom mb-4">
+	<button class="btn btn-outline-success sticky w-100" type="submit">{{ button_label|default('Créer') }}</button>
+	<br><br>
+</div>
+
 {{ form_end(form) }}

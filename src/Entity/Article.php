@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
@@ -18,6 +19,12 @@ class Article
     private ?int $id = null;
 
     #[ORM\Column(length: 60)]
+    #[Assert\Length(
+        min: 5,
+        max: 60,
+        minMessage: 'La taille du titre doit être supérieur à {{ limit }} caractères ! ',
+        maxMessage: 'La taille du titre doit être inférieur à {{ limit }} caractères ! '
+    )]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -27,6 +34,11 @@ class Article
     private ?string $imageUrl = null;
 
     #[ORM\Column]
+    #[Assert\Range(
+        min: '1950-01-01',
+        max: 'today',
+        notInRangeMessage: 'La date de création doit être comprise entre le 01/01/1950 et aujourd\'hui.'
+    )]    
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
@@ -62,10 +74,10 @@ class Article
 
     public function setTitle(string $title): static
     {
-        $this->title = $title;  
+        $this->title = $title;
         $slugify = new Slugify();
         $this->slug = $slugify->slugify($this->title);
-        
+
         return $this;
     }
 

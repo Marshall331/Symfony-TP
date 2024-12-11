@@ -1,0 +1,18 @@
+{% extends 'layout_blog.html.twig' %}
+
+{% block title %}
+	Créer un article
+{% endblock %}
+
+{% block body %}
+
+	<a href="{{ path('app_article_index') }}" class="btn btn-outline-primary">
+		&nbsp;Retour à la liste des articles
+	</a>
+
+	<hr>
+	<h1 class="text-center">Créer un article</h1>
+
+	{{ include('article/_form.html.twig') }}
+
+{% endblock %}

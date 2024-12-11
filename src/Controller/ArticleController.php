@@ -10,19 +10,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/article')]
 final class ArticleController extends AbstractController
 {
-    #[Route(name: 'app_blog_index', methods: ['GET'])]
+    #[Route(name: 'app_article_index', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository): Response
     {
-        return $this->render('blog/index.html.twig', [
+        return $this->render('article/index.html.twig', [
             'articles' => $articleRepository->findAll(),
         ]);
     }
 
-    #[Route('/new', name: 'app_blog_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER', message: 'Vous n\'avez pas accès à cette page')]
+    #[Route('/new', name: 'app_article_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $article = new Article();
@@ -35,24 +37,26 @@ final class ArticleController extends AbstractController
             $entityManager->persist($article);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_blog_show', ['slug' => $article->getSlug()], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', message: 'L\'article a bien été créé !');
+            return $this->redirectToRoute('app_article_show', ['slug' => $article->getSlug()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('blog/new.html.twig', [
+        return $this->render('article/new.html.twig', [
             'article' => $article,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{slug}', name: 'app_blog_show', methods: ['GET'])]
+    #[Route('/{slug}', name: 'app_article_show', methods: ['GET'])]
     public function show(Article $article): Response
     {
-        return $this->render('blog/show.html.twig', [
+        return $this->render('article/show.html.twig', [
             'article' => $article,
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_blog_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER', message: 'Vous n\'avez pas accès à cette page')]
+    #[Route('/{id}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Article $article, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ArticleType::class, $article);
@@ -62,17 +66,18 @@ final class ArticleController extends AbstractController
             $article->setUpdatedAt(new \DateTimeImmutable());
 
             $entityManager->flush();
-
-            return $this->redirectToRoute('app_blog_show', ['slug' => $article->getSlug()], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', message: 'L\'article a bien été modifié !');
+            return $this->redirectToRoute('app_article_show', ['slug' => $article->getSlug()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('blog/edit.html.twig', [
+        return $this->render('article/edit.html.twig', [
             'article' => $article,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_blog_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas accès à cette page')]
+    #[Route('/{id}', name: 'app_article_delete', methods: ['POST'])]
     public function delete(Request $request, Article $article, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->getPayload()->getString('_token'))) {
@@ -80,6 +85,7 @@ final class ArticleController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_blog_index', [], Response::HTTP_SEE_OTHER);
+        $this->addFlash('success', message: 'L\'article a bien été supprimé !');
+        return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
     }
 }

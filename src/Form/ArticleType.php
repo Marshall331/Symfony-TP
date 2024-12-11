@@ -21,6 +21,7 @@ class ArticleType extends AbstractType
             ->add('title', TextType::class, options: [
                 'label' => 'Titre',
                 'attr' => ['class' => 'form-control mt-2'],
+                'required' => false,
             ])
             ->add('content', TextareaType::class, [
                 'label' => 'Contenu',
@@ -59,6 +60,14 @@ class ArticleType extends AbstractType
                     ];
                 },
             ])
+            // ->add('createdAt', DateType::class, [
+            //     'widget' => 'single_text',
+            //     'label' => 'Date d\'ouverture :',
+            //     'label_attr' => ['class' => 'form-label'],
+            //     'attr' => ['class' => 'form-control mb-2'],
+            //     'required' => false,
+            //     'data' => new \DateTimeImmutable(),
+            // ])
         ;
     }
 
