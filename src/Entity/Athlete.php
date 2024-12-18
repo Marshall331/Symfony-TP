@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AthleteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -36,8 +38,16 @@ class Athlete
     #[ORM\JoinColumn(nullable: false)]
     private ?Pays $pays = null;
 
-    #[ORM\ManyToOne(inversedBy: 'athletes')]
-    private ?Discipline $discipline = null;
+    /**
+     * @var Collection<int, Discipline>
+     */
+    #[ORM\ManyToMany(targetEntity: Discipline::class, inversedBy: 'athletes')]
+    private Collection $discipline;
+
+    public function __construct()
+    {
+        $this->discipline = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -128,14 +138,26 @@ class Athlete
         return $this;
     }
 
-    public function getDiscipline(): ?Discipline
+    /**
+     * @return Collection<int, Discipline>
+     */
+    public function getDiscipline(): Collection
     {
         return $this->discipline;
     }
 
-    public function setDiscipline(?Discipline $discipline): static
+    public function addDiscipline(Discipline $discipline): static
     {
-        $this->discipline = $discipline;
+        if (!$this->discipline->contains($discipline)) {
+            $this->discipline->add($discipline);
+        }
+
+        return $this;
+    }
+
+    public function removeDiscipline(Discipline $discipline): static
+    {
+        $this->discipline->removeElement($discipline);
 
         return $this;
     }

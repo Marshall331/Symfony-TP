@@ -30,7 +30,7 @@ class Discipline
     /**
      * @var Collection<int, Athlete>
      */
-    #[ORM\OneToMany(targetEntity: Athlete::class, mappedBy: 'discipline')]
+    #[ORM\ManyToMany(targetEntity: Athlete::class, mappedBy: 'discipline')]
     private Collection $athletes;
 
     public function __construct()
@@ -103,7 +103,7 @@ class Discipline
     {
         if (!$this->athletes->contains($athlete)) {
             $this->athletes->add($athlete);
-            $athlete->setDiscipline($this);
+            $athlete->addDiscipline($this);
         }
 
         return $this;
@@ -112,10 +112,7 @@ class Discipline
     public function removeAthlete(Athlete $athlete): static
     {
         if ($this->athletes->removeElement($athlete)) {
-            // set the owning side to null (unless already changed)
-            if ($athlete->getDiscipline() === $this) {
-                $athlete->setDiscipline(null);
-            }
+            $athlete->removeDiscipline($this);
         }
 
         return $this;
