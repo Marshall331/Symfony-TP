@@ -23,7 +23,7 @@ final class ArticleController extends AbstractController
         ]);
     }
 
-    #[IsGranted('ROLE_USER', message: 'Vous n\'avez pas accès à cette page')]
+    #[IsGranted('ROLE_USER', message: 'Vous n\'avez pas accès à cette page !')]
     #[Route('/new', name: 'app_article_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
