@@ -1,0 +1,8 @@
+{% if errors|length > 0 %}
+	<div class="text-danger d-flex align-items-center mt-2">
+		<i class="fa-solid fa-xmark me-1"></i>
+		{% for error in errors %}
+			{{ error.message }}
+		{% endfor %}
+	</div>
+{% endif %}

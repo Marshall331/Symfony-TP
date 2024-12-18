@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<title>Athlete index</title>
+
+{% block body %}
+    <h1>Athlete index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NomPrenom</th>
+                <th>DateNaiss</th>
+                <th>Photo</th>
+                <th>Genre</th>
+                <th>Taille</th>
+                <th>Poids</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for athlete in athletes %}
+            <tr>
+                <td>{{ athlete.id }}</td>
+                <td>{{ athlete.nomPrenom }}</td>
+                <td>{{ athlete.dateNaiss ? athlete.dateNaiss|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ athlete.photo }}</td>
+                <td>{{ athlete.genre }}</td>
+                <td>{{ athlete.taille }}</td>
+                <td>{{ athlete.poids }}</td>
+                <td>
+                    <a href="{{ path('app_athlete_show', {'id': athlete.id}) }}">show</a>
+                    <a href="{{ path('app_athlete_edit', {'id': athlete.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_athlete_new') }}">Create new</a>
+{% endblock %}
