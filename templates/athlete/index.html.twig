@@ -43,8 +43,12 @@
 					<td>{{ athlete.taille }}</td>
 					<td>{{ athlete.poids }}</td>
 					<td>
-						<a href="{{ path('app_athlete_show', {'id': athlete.id}) }}">show</a>
-						<a href="{{ path('app_athlete_edit', {'id': athlete.id}) }}">edit</a>
+						<a href="{{ path('app_athlete_show', {'id': athlete.id}) }}" class="btn btn-outline-dark m-1">
+							<i class="fa-solid fa-search fa-lg"></i>
+						</a>
+						<a href="{{ path('app_athlete_edit', {'id': athlete.id}) }}" class="btn btn-outline-info m-1">
+							<i class="fa-solid fa-pen-to-square fa-lg"></i>
+						</a>
 					</td>
 				</tr>
 			{% else %}

@@ -43,11 +43,6 @@ class ArticleType extends AbstractType
                 'label_attr' => ['class' => 'form-label'],
                 'attr' => ['class' => 'form-control'],
             ])
-            ->add('categories', EntityType::class, [
-                'class' => Category::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
             ->add('categories', \Symfony\Bridge\Doctrine\Form\Type\EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',

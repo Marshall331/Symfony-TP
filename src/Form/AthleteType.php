@@ -29,7 +29,15 @@ class AthleteType extends AbstractType
             ])
             ->add('discipline', EntityType::class, [
                 'class' => Discipline::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nomDis',
+                'multiple' => true,
+                'expanded' => true,
+                'label' => ' ',
+                'choice_attr' => function () {
+                    return [
+                        'class' => 'form-check-input',
+                    ];
+                },
             ])
         ;
     }
