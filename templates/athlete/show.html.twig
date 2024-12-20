@@ -108,10 +108,9 @@
 				{% for discipline in athlete.discipline %}
 					<tr>
 						<td>
-							{# <a href="{{ path('app_category_show', {'id': discipline.nomDis }) }}"> #}
-							LIEN ICI
-							{{discipline.sportDis}}
-							{# </a> #}
+							<a href="{{ path('app_discipline_show', {'id': discipline.id}) }}">
+								{{discipline.sportDis}}
+							</a>
 						</td>
 						<td>{{discipline.nomDis}}</td>
 						<td>{{discipline.descriptionDis}}</td>

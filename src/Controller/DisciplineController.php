@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/discipline')]
+#[Route('/JO/discipline')]
 final class DisciplineController extends AbstractController
 {
     #[Route(name: 'app_discipline_index', methods: ['GET'])]

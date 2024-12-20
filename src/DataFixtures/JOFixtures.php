@@ -52,7 +52,7 @@ class JOFixtures extends Fixture
         for ($i = 0; $i < 20; $i++) {
             $discipline = new Discipline();
 
-            $discipline->setNomDis($faker->sentence())
+            $discipline->setNomDis($faker->word())
                 ->setSportDis($faker->word())
                 ->setDescriptionDis($faker->word())
                 ->setLogoDis("https://picsum.photos/200?image=" . $faker->numberBetween(100, 500));
