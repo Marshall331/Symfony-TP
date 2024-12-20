@@ -1,4 +1,32 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+<div class="form-group mb-3">
+	{{ form_label(form.codeCio) }}
+	{{ form_widget(form.codeCio) }}
+	{% include 'partials/form_errors.html.twig' with { 'errors': form.codeCio.vars.errors } %}
+</div>
+
+<div class="form-group mb-3">
+	{{ form_label(form.nomPays) }}
+	{{ form_widget(form.nomPays) }}
+	{% include 'partials/form_errors.html.twig' with { 'errors': form.nomPays.vars.errors } %}
+</div>
+
+<div class="form-group mb-3">
+	{{ form_label(form.nomContinent) }}
+	{{ form_widget(form.nomContinent) }}
+	{% include 'partials/form_errors.html.twig' with { 'errors': form.nomContinent.vars.errors } %}
+</div>
+
+<div class="form-group mb-3">
+	{{ form_label(form.emblemePays) }}
+	{{ form_widget(form.emblemePays) }}
+	{% include 'partials/form_errors.html.twig' with { 'errors': form.emblemePays.vars.errors } %}
+</div>
+
+<div class="sticky-bottom mb-4">
+	<button class="btn btn-outline-success sticky w-100" type="submit">{{ button_label|default('Ajouter') }}</button>
+	<br><br>
+</div>
+
 {{ form_end(form) }}

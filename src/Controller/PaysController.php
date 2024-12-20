@@ -26,28 +26,31 @@ final class PaysController extends AbstractController
     #[Route('/new', name: 'app_pays_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $pay = new Pays();
-        $form = $this->createForm(PaysType::class, $pay);
+        $pays = new Pays();
+        $form = $this->createForm(PaysType::class, $pays);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($pay);
+            $entityManager->persist($pays);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_pays_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', message: 'Le pays a bien été créé !');
+            return $this->redirectToRoute('app_pays_show', [
+                'id' => $pays->getId()
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('pays/new.html.twig', [
-            'pay' => $pay,
+            'pays' => $pays,
             'form' => $form,
         ]);
     }
 
     #[Route('/{id}', name: 'app_pays_show', methods: ['GET'])]
-    public function show(Pays $pay): Response
+    public function show(Pays $pays): Response
     {
         return $this->render('pays/show.html.twig', [
-            'pay' => $pay,
+            'pays' => $pays,
         ]);
     }
 
@@ -60,6 +63,7 @@ final class PaysController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', message: 'Le pays a bien été modifié !');
             return $this->redirectToRoute('app_pays_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -77,11 +81,12 @@ final class PaysController extends AbstractController
             $athletes = $athleteRepository->findByPays($pays);
 
             foreach ($athletes as $athlete) {
-                $athlete->setPays(null); 
+                $athlete->setPays(null);
             }
 
             $entityManager->remove($pays);
             $entityManager->flush();
+            $this->addFlash('success', message: 'Le pays a bien été supprimé !');
         }
 
         return $this->redirectToRoute('app_pays_index', [], Response::HTTP_SEE_OTHER);
