@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Pays;
 use App\Form\PaysType;
+use App\Repository\AthleteRepository;
 use App\Repository\PaysRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -51,9 +52,9 @@ final class PaysController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_pays_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Pays $pay, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Pays $pays, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(PaysType::class, $pay);
+        $form = $this->createForm(PaysType::class, $pays);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,16 +64,23 @@ final class PaysController extends AbstractController
         }
 
         return $this->render('pays/edit.html.twig', [
-            'pay' => $pay,
+            'pays' => $pays,
             'form' => $form,
         ]);
     }
 
     #[Route('/{id}', name: 'app_pays_delete', methods: ['POST'])]
-    public function delete(Request $request, Pays $pay, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Pays $pays, AthleteRepository $athleteRepository, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$pay->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($pay);
+        if ($this->isCsrfTokenValid('delete' . $pays->getId(), $request->getPayload()->getString('_token'))) {
+
+            $athletes = $athleteRepository->findByPays($pays);
+
+            foreach ($athletes as $athlete) {
+                $athlete->setPays(null); 
+            }
+
+            $entityManager->remove($pays);
             $entityManager->flush();
         }
 

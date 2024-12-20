@@ -35,7 +35,7 @@ class Athlete
     private ?string $poids = null;
 
     #[ORM\ManyToOne(inversedBy: 'athletes')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Pays $pays = null;
 
     /**
