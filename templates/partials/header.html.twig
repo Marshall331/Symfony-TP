@@ -10,42 +10,36 @@
 			<ul class="navbar-nav me-auto">
 				<li class="nav-item">
 					<a class="nav-link {% if app.request.attributes.get('_controller') starts with 'App\\Controller\\JOHomeController' %}active{% endif %}" href="{{ path('jo_app_home') }}">
-						<i class="fa-solid fa-home fa-xl"></i>
-						Accueil
+						<i class="fa-solid fa-home fa-xl"></i>&nbsp;Accueil
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link {% if app.request.attributes.get('_controller') starts with 'App\\Controller\\AthleteController' %}active{% endif %}" href="{{path('app_athlete_index')}}">
-						<i class="fa-solid fa-person-running fa-xl"></i>
-						Athletes
+						<i class="fa-solid fa-person-running fa-xl"></i>&nbsp;Athletes
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link {% if app.request.attributes.get('_controller') starts with 'App\\Controller\\DisciplineController' %}active{% endif %}" href="{{path('app_discipline_index')}}">
-						<i class="fa-solid fa-list fa-xl"></i>
-						Disciplines
+						<i class="fa-solid fa-list fa-xl"></i>&nbsp;Disciplines
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link {% if app.request.attributes.get('_controller') starts with 'App\\Controller\\PaysController' %}active{% endif %}" href="{{path('app_pays_index')}}">
-						<i class="fa-solid fa-globe fa-xl"></i>
-						Pays
+						<i class="fa-solid fa-globe fa-xl"></i>&nbsp;Pays
 					</a>
 				</li>
 			</ul>
 			<ul class="navbar-nav">
 				<div>
 					<div class="d-flex mt-3">
-						<a {# href="{{ path('login_dev', {role: 'ROLE_ADMIN'}) }}" #} class="btn btn-outline-danger me-2 {% if is_granted('ROLE_ADMIN') %}disabled{% endif %}">
-							User
+						<a class="btn btn-outline-primary me-2" href=" {{ path('app_login') }} ">
+							<i class="fa-solid fa-arrow-right-to-bracket fa-xl"></i>&nbsp;Connexion
 						</a>
-						<a {# href="{{ path('login_dev', {role: 'ROLE_ENSEIGNANT'}) }}" #} class="btn btn-outline-success me-2 {% if is_granted('ROLE_ENSEIGNANT') and not is_granted('ROLE_ADMIN') %}disabled{% endif %}">
-							Admin
+						<a class="btn btn-outline-secondary me-2" href=" {{ path('app_register') }} ">
+							<i class="fa-solid fa-user-plus fa-xl"></i>&nbsp;Créer un compte
 						</a>
 					</div>
-					<div class="mt-2 text-body-secondary">
-						(DEV) Switch de compte
-					</div>
+
 				</div>
 				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 					<small class="text-body-secondary text-capitalize">Bonjour,
