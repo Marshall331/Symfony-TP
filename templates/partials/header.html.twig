@@ -27,7 +27,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link">
+					<a class="nav-link {% if app.request.attributes.get('_controller') starts with 'App\\Controller\\PaysController' %}active{% endif %}" href="{{path('app_pays_index')}}">
 						<i class="fa-solid fa-globe fa-xl"></i>
 						Pays
 					</a>

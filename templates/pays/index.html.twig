@@ -1,0 +1,58 @@
+{% extends 'layout_jo.html.twig' %}
+
+{% block title %}
+	Liste des pays
+{% endblock %}
+
+{% block body %}
+	<a class="btn btn-outline-primary" href="{{ path('app_pays_new') }}">
+		<i class="fa-solid fa-plus fa-2xl"></i>&nbsp;Ajouter un pays
+	</a>
+
+	<div class="text-center">
+		<h1>Liste des pays</h1>
+		<h5>{{pays | length}}
+			Pays trouvé(s)
+		</h5>
+	</div>
+	<hr>
+	<table class="table text-center">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>CodeCio</th>
+				<th>NomPays</th>
+				<th>NomContinent</th>
+				<th>EmblemePays</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for country in pays %}
+				<tr>
+					<td>
+						<a class="btn btn-link" href="{{ path('app_pays_show', {'id': country.id}) }}">{{ country.id }}</a>
+					</td>
+					<td>{{ country.codeCio }}</td>
+					<td>{{ country.nomPays }}</td>
+					<td>{{ country.nomContinent }}</td>
+					<td>
+						<img src={{ country.emblemePays }} width="100" height="100">
+					</td>
+					<td>
+						<a href="{{ path('app_pays_show', {'id': country.id}) }}" class="btn btn-outline-dark m-1">
+							<i class="fa-solid fa-search fa-lg"></i>
+						</a>
+						<a href="{{ path('app_pays_edit', {'id': country.id}) }}" class="btn btn-outline-info m-1">
+							<i class="fa-solid fa-pen-to-square fa-lg"></i>
+						</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6">Aucun pays</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

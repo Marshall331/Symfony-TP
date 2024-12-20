@@ -34,7 +34,9 @@ final class AthleteController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', message: 'L\'athlète a bien été créé(e) !');
-            return $this->redirectToRoute('app_athlete_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_athlete_show', [
+                'id' => $athlete->getId()
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('athlete/new.html.twig', [

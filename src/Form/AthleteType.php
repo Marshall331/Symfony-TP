@@ -40,7 +40,7 @@ class AthleteType extends AbstractType
                 'label_attr' => ['class' => 'form-label'],
                 'choices' => [
                     'Masculin' => 'M',
-                    'Féminim' => 'F',
+                    'Féminin' => 'F',
                 ],
                 'attr' => ['class' => 'form-control'],
             ])
