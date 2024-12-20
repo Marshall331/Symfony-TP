@@ -21,7 +21,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link">
+					<a class="nav-link {% if app.request.attributes.get('_controller') starts with 'App\\Controller\\DisciplineController' %}active{% endif %}" href="{{path('app_discipline_index')}}">
 						<i class="fa-solid fa-list fa-xl"></i>
 						Disciplines
 					</a>

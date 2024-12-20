@@ -40,7 +40,9 @@
 							<th>Pays</th>
 							<td>
 								{% if athlete.pays is not null %}
-									{{ athlete.pays.nomPays }}
+									<a href="{{ path('app_pays_show', {'id': athlete.pays.id}) }}">
+										{{ athlete.pays.nomPays }}
+									</a>
 								{% else %}
 									-
 								{% endif %}
@@ -118,8 +120,8 @@
 						</td>
 					</tr>
 				{% else %}
-					<tr>
-						<td class="text-center" colspan="4">Aucune discipline</td>
+					<tr class="text-center">
+						<td colspan="4">Aucune discipline</td>
 					</tr>
 				{% endfor %}
 			</tbody>

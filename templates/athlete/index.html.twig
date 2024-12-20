@@ -28,8 +28,8 @@
 				<th>Date de naissance</th>
 				<th>Photo</th>
 				<th>Genre</th>
-				<th>Taille</th>
-				<th>Poids</th>
+				<th>Taille (cm)</th>
+				<th>Poids (kg)</th>
 				<th>actions</th>
 			</tr>
 		</thead>
@@ -37,7 +37,7 @@
 			{% for athlete in athletes %}
 				<tr>
 					<td>
-						<a href="{{ path('app_athlete_show', {'id': athlete.id}) }}" class="btn btn-link">
+						<a href="{{ path('app_athlete_show', {'id': athlete.id}) }}">
 							{{ athlete.id }}
 						</a>
 					</td>
@@ -74,7 +74,7 @@
 					</td>
 				</tr>
 			{% else %}
-				<tr>
+				<tr class="text-center">
 					<td colspan="8">Aucun athlète</td>
 				</tr>
 			{% endfor %}

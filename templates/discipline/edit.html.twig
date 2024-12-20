@@ -1,0 +1,25 @@
+{% extends 'layout_jo.html.twig' %}
+
+{% block title %}
+	Modifier une discipline
+{% endblock %}
+
+{% block body %}
+	<a href="{{ path('app_discipline_index') }}" class="btn btn-outline-primary">
+		<i class="fa-solid fa-arrow-left fa-2xl"></i>&nbsp;Retour à la liste
+	</a>
+
+	<hr>
+
+	<div class="d-flex justify-content-between mt-2">
+		<a href="{{ path('app_discipline_show', {'id': discipline.id }) }}" class="btn btn-outline-dark">
+			<i class="fa-solid fa-search fa-lg"></i>&nbsp;Détail
+		</a>
+		{{ include('discipline/_delete_form.html.twig') }}
+	</div>
+
+	<h1 class="text-center">Modifier une discipline</h1>
+
+	{{ include('discipline/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+{% endblock %}

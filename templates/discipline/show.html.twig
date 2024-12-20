@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<title>Discipline</title>
+
+{% block body %}
+    <h1>Discipline</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ discipline.id }}</td>
+            </tr>
+            <tr>
+                <th>NomDis</th>
+                <td>{{ discipline.nomDis }}</td>
+            </tr>
+            <tr>
+                <th>SportDis</th>
+                <td>{{ discipline.sportDis }}</td>
+            </tr>
+            <tr>
+                <th>DescriptionDis</th>
+                <td>{{ discipline.descriptionDis }}</td>
+            </tr>
+            <tr>
+                <th>LogoDis</th>
+                <td>{{ discipline.logoDis }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_discipline_index') }}">back to list</a>
+
+    <a href="{{ path('app_discipline_edit', {'id': discipline.id}) }}">edit</a>
+
+    {{ include('discipline/_delete_form.html.twig') }}
+{% endblock %}

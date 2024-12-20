@@ -1,0 +1,18 @@
+{% extends 'layout_jo.html.twig' %}
+
+{% block title %}
+	Ajouter une discipline
+{% endblock %}
+
+{% block body %}
+
+	<a href="{{ path('app_discipline_index') }}" class="btn btn-outline-primary">
+		<i class="fa-solid fa-arrow-left fa-2xl"></i>&nbsp;Retour à la liste
+	</a>
+
+	<h1 class="text-center">Ajouter un discipline</h1>
+	<hr>
+
+	{{ include('discipline/_form.html.twig') }}
+
+{% endblock %}

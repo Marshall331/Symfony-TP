@@ -22,7 +22,7 @@ class JOFixtures extends Fixture
         $faker = Factory::create(locale: 'fr_FR');
 
         $continents = [
-            "Europe",
+            "Europe" ,
             "Afrique",
             "Asie",
             "Amérique du nord",

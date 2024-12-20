@@ -31,7 +31,7 @@
 			{% for country in pays %}
 				<tr>
 					<td>
-						<a class="btn btn-link" href="{{ path('app_pays_show', {'id': country.id}) }}">{{ country.id }}</a>
+						<a href="{{ path('app_pays_show', {'id': country.id}) }}">{{ country.id }}</a>
 					</td>
 					<td>{{ country.codeCio }}</td>
 					<td>{{ country.nomPays }}</td>
@@ -49,7 +49,7 @@
 					</td>
 				</tr>
 			{% else %}
-				<tr>
+				<tr class="text-center">
 					<td colspan="6">Aucun pays</td>
 				</tr>
 			{% endfor %}
