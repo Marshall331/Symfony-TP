@@ -33,6 +33,7 @@ final class AthleteController extends AbstractController
             $entityManager->persist($athlete);
             $entityManager->flush();
 
+            $this->addFlash('success', message: 'L\'athlète a bien été créé(e) !');
             return $this->redirectToRoute('app_athlete_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -59,7 +60,10 @@ final class AthleteController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_athlete_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', message: 'L\'athlète a bien été modifié(e) !');
+            return $this->redirectToRoute('app_athlete_show', [
+                'id' => $athlete->getId()
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('athlete/edit.html.twig', [
@@ -71,9 +75,11 @@ final class AthleteController extends AbstractController
     #[Route('/{id}', name: 'app_athlete_delete', methods: ['POST'])]
     public function delete(Request $request, Athlete $athlete, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$athlete->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $athlete->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($athlete);
             $entityManager->flush();
+
+            $this->addFlash('success', message: 'L\'athlète a bien été supprimé(e) !');
         }
 
         return $this->redirectToRoute('app_athlete_index', [], Response::HTTP_SEE_OTHER);

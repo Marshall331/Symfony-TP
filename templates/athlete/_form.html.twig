@@ -7,6 +7,25 @@
 </div>
 
 <div class="form-group mb-3">
+	{{ form_label(form.pays) }}
+	{{ form_widget(form.pays) }}
+	{% include 'partials/form_errors.html.twig' with { 'errors': form.pays.vars.errors } %}
+</div>
+
+<div class="form-group mb-3">
+	<label class="form-check-label">Disciplines :</label>
+	<div class="col-12 col-md-auto d-flex flex-wrap align-items-center mt-2">
+		{% for choice in form.discipline %}
+			<div class="form-check me-4 mb-2">
+				{{ form_widget(choice) }}
+				{{ form_label(choice) }}
+			</div>
+		{% endfor %}
+	</div>
+	{% include 'partials/form_errors.html.twig' with { 'errors': form.discipline.vars.errors } %}
+</div>
+
+<div class="form-group mb-3">
 	{{ form_label(form.dateNaiss) }}
 	{{ form_widget(form.dateNaiss) }}
 	{% include 'partials/form_errors.html.twig' with { 'errors': form.dateNaiss.vars.errors } %}
@@ -34,25 +53,6 @@
 	{{ form_label(form.poids) }}
 	{{ form_widget(form.poids) }}
 	{% include 'partials/form_errors.html.twig' with { 'errors': form.poids.vars.errors } %}
-</div>
-
-<div class="form-group mb-3">
-	{{ form_label(form.pays) }}
-	{{ form_widget(form.pays) }}
-	{% include 'partials/form_errors.html.twig' with { 'errors': form.pays.vars.errors } %}
-</div>
-
-<div class="form-group mb-3">
-	<label class="form-check-label">Disciplines :</label>
-	<div class="col-12 col-md-auto d-flex flex-wrap align-items-center mt-2">
-		{% for choice in form.discipline %}
-			<div class="form-check me-4 mb-2">
-				{{ form_widget(choice) }}
-				{{ form_label(choice) }}
-			</div>
-		{% endfor %}
-	</div>
-	{% include 'partials/form_errors.html.twig' with { 'errors': form.discipline.vars.errors } %}
 </div>
 
 <div class="sticky-bottom mb-4">

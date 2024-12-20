@@ -24,4 +24,6 @@
 	</div>
 </div>
 
-<form id="deleteForm-{{ athlete.id }}" action="{{ path('app_athlete_delete', {'id': athlete.id}) }}" method="post" style="display: none;"></form>
+<form id="deleteForm-{{ athlete.id }}" action="{{ path('app_athlete_delete', {'id': athlete.id}) }}" method="post" style="display: none;">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ athlete.id) }}">
+</form>
