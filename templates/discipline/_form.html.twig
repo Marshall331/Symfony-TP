@@ -1,4 +1,32 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+<div class="form-group mb-3">
+	{{ form_label(form.nomDis) }}
+	{{ form_widget(form.nomDis) }}
+	{% include 'partials/form_errors.html.twig' with { 'errors': form.nomDis.vars.errors } %}
+</div>
+
+<div class="form-group mb-3">
+	{{ form_label(form.sportDis) }}
+	{{ form_widget(form.sportDis) }}
+	{% include 'partials/form_errors.html.twig' with { 'errors': form.sportDis.vars.errors } %}
+</div>
+
+<div class="form-group mb-3">
+	{{ form_label(form.descriptionDis) }}
+	{{ form_widget(form.descriptionDis) }}
+	{% include 'partials/form_errors.html.twig' with { 'errors': form.descriptionDis.vars.errors } %}
+</div>
+
+<div class="form-group mb-3">
+	{{ form_label(form.logoDis) }}
+	{{ form_widget(form.logoDis) }}
+	{% include 'partials/form_errors.html.twig' with { 'errors': form.logoDis.vars.errors } %}
+</div>
+
+<div class="sticky-bottom mb-4">
+	<button class="btn btn-outline-success sticky w-100" type="submit">{{ button_label|default('Ajouter') }}</button>
+	<br><br>
+</div>
+
 {{ form_end(form) }}

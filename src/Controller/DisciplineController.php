@@ -33,7 +33,10 @@ final class DisciplineController extends AbstractController
             $entityManager->persist($discipline);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_discipline_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', message: 'La discipline a bien été créée !');
+            return $this->redirectToRoute('app_discipline_show', [
+                'id' => $discipline->getId()
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('discipline/new.html.twig', [
@@ -59,6 +62,7 @@ final class DisciplineController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', message: 'La discipline a bien été modifiée !');
             return $this->redirectToRoute('app_discipline_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -71,9 +75,11 @@ final class DisciplineController extends AbstractController
     #[Route('/{id}', name: 'app_discipline_delete', methods: ['POST'])]
     public function delete(Request $request, Discipline $discipline, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$discipline->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $discipline->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($discipline);
             $entityManager->flush();
+
+            $this->addFlash('success', message: 'La discipline a bien été supprimée !');
         }
 
         return $this->redirectToRoute('app_discipline_index', [], Response::HTTP_SEE_OTHER);
