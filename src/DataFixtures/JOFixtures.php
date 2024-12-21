@@ -2,18 +2,13 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Article;
-use App\Entity\Profile;
-use App\Entity\User;
-use App\Entity\Address;
 use App\Entity\Athlete;
-use App\Entity\Category;
 use App\Entity\Discipline;
+use App\Entity\MemberJO;
 use App\Entity\Pays;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
-use DateTime;
 
 class JOFixtures extends Fixture
 {
@@ -21,8 +16,24 @@ class JOFixtures extends Fixture
     {
         $faker = Factory::create(locale: 'fr_FR');
 
+        // création d'un utilisateur
+        $user = new MemberJO();
+        $user->setEmail("user@user.fr")
+            ->setPassword('$2y$13$y2vgk91lpyYTcKtetDgfJO5uYRc9I11CqRnWvpVfYxZhIngosW9VS')
+            ->setRoles(["ROLE_USER"]);
+
+        // création d'un administrateur
+        $admin = new MemberJO();
+        $admin->setEmail("admin@admin.fr")
+            ->setPassword('$2y$13$cGvb7eHtzquMIvEzJp6g4eEaPpzlRbwU6o6b9p4hed/okvVMgYdHa')
+            ->setRoles(["ROLE_USER", "ROLE_ADMIN"]);
+
+        $manager->persist($user);
+        $manager->persist($admin);
+        $manager->flush();
+
         $continents = [
-            "Europe" ,
+            "Europe",
             "Afrique",
             "Asie",
             "Amérique du nord",

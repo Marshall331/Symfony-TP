@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\MemberRepository;
+use App\Repository\MemberJORepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: MemberRepository::class)]
+#[ORM\Entity(repositoryClass: MemberJORepository::class)]
 #[ORM\Table(name: '`memberjo`')]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[UniqueEntity(fields: ['email'], message: 'Cet email existe déjà !')]

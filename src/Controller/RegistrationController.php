@@ -21,6 +21,12 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $roles = ['ROLE_USER'];
+            if ($form->get('roles')->getData() === 'ROLE_ADMIN') {
+                $roles = ['ROLE_USER', 'ROLE_ADMIN'];
+            }
+            $user->setRoles($roles);
+
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
 
@@ -32,7 +38,8 @@ class RegistrationController extends AbstractController
 
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('app_home');
+            $this->addFlash('success', message: 'Votre compte a bien été créé, vous pouvez à présent vous connecter !');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/register.html.twig', [
