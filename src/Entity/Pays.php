@@ -6,6 +6,7 @@ use App\Repository\PaysRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PaysRepository::class)]
 class Pays
@@ -16,6 +17,12 @@ class Pays
     private ?int $id = null;
 
     #[ORM\Column(length: 3)]
+    #[Assert\NotBlank(message: 'Le code CIO ne peut pas être vide.')]
+    #[Assert\Length(
+        min: 3,
+        max: 3,
+        exactMessage: 'Le code CIO doit comporter exactement {{ limit }} caractères.'
+    )]
     private ?string $codeCio = null;
 
     #[ORM\Column(length: 55, nullable: true)]

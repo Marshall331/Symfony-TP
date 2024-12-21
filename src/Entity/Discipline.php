@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Cocur\Slugify\Slugify;
 
 #[ORM\Entity(repositoryClass: DisciplineRepository::class)]
 class Discipline
@@ -15,6 +16,9 @@ class Discipline
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
 
     #[ORM\Column(length: 80)]
     #[Assert\NotBlank(message: 'Le nom de la discipline ne peut pas être vide.')]
@@ -51,6 +55,18 @@ class Discipline
         return $this->id;
     }
 
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
     public function getNomDis(): ?string
     {
         return $this->nomDis;
@@ -59,6 +75,8 @@ class Discipline
     public function setNomDis(string $nomDis): static
     {
         $this->nomDis = $nomDis;
+        $slugify = new Slugify();
+        $this->slug = $slugify->slugify($this->nomDis);
 
         return $this;
     }

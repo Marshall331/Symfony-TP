@@ -112,12 +112,9 @@
 				{% for discipline in athlete.discipline %}
 					<tr>
 						<td>
-							<a href="{{ path('app_discipline_show', {'id': discipline.id}) }}">
-								{{discipline.id}}
-							</a>
+							<a href="{{ path('app_discipline_show', {'slug': discipline.slug}) }}">{{ discipline.nomDis }}</a>
 						</td>
 						<td>{{discipline.sportDis}}</td>
-						<td>{{discipline.nomDis}}</td>
 						<td>{{discipline.descriptionDis}}</td>
 						<td>
 							<img src={{discipline.logoDis}} width="100" height="100">

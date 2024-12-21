@@ -37,7 +37,7 @@ final class DisciplineController extends AbstractController
 
             $this->addFlash('success', message: 'La discipline a bien été créée !');
             return $this->redirectToRoute('app_discipline_show', [
-                'id' => $discipline->getId()
+                'slug' => $discipline->getSlug()
             ], Response::HTTP_SEE_OTHER);
         }
 
@@ -47,7 +47,7 @@ final class DisciplineController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_discipline_show', methods: ['GET'])]
+    #[Route('/{slug}', name: 'app_discipline_show', methods: ['GET'])]
     public function show(Discipline $discipline): Response
     {
         return $this->render('discipline/show.html.twig', [
@@ -66,7 +66,9 @@ final class DisciplineController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', message: 'La discipline a bien été modifiée !');
-            return $this->redirectToRoute('app_discipline_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_discipline_show', [
+                'slug' => $discipline->getSlug()
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('discipline/edit.html.twig', [

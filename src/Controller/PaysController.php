@@ -67,7 +67,9 @@ final class PaysController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', message: 'Le pays a bien été modifié !');
-            return $this->redirectToRoute('app_pays_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_pays_show', [
+                'id' => $pays->getId()
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('pays/edit.html.twig', [

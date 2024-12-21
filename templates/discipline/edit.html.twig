@@ -12,7 +12,7 @@
 	<hr>
 
 	<div class="d-flex justify-content-between mt-2">
-		<a href="{{ path('app_discipline_show', {'id': discipline.id }) }}" class="btn btn-outline-dark">
+		<a href="{{ path('app_discipline_show', {'slug': discipline.slug }) }}" class="btn btn-outline-dark">
 			<i class="fa-solid fa-search fa-lg"></i>&nbsp;Détail
 		</a>
 		{% if is_granted('ROLE_ADMIN') %}

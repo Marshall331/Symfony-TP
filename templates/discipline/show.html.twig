@@ -68,7 +68,7 @@
 				<tr>
 					<th>Id</th>
 					<th>Nom & Prénom</th>
-					<th>Photo</th>
+					<th>Pays</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -81,7 +81,11 @@
 						</td>
 						<td>{{ athlete.nomPrenom }}</td>
 						<td>
-							<img src={{ athlete.photo }} width="100" height="100">
+							{% if athlete.pays is not null %}
+								{{ athlete.pays.nomPays }}
+							{% else %}
+								-
+							{% endif %}
 						</td>
 					</tr>
 				{% else %}
