@@ -12,10 +12,14 @@
 	<hr>
 
 	<div class="d-flex justify-content-between mt-2">
-		<a href="{{ path('app_pays_edit', {'id': pays.id }) }}" class="btn btn-outline-info">
-			<i class="fa-solid fa-pen-to-square fa-lg"></i>&nbsp;Modifier
-		</a>
-		{{ include('pays/_delete_form.html.twig') }}
+		{% if is_granted('ROLE_USER') %}
+			<a href="{{ path('app_pays_edit', {'id': pays.id }) }}" class="btn btn-outline-info">
+				<i class="fa-solid fa-pen-to-square fa-lg"></i>&nbsp;Modifier
+			</a>
+			{% if is_granted('ROLE_ADMIN') %}
+				{{ include('pays/_delete_form.html.twig') }}
+			{% endif %}
+		{% endif %}
 	</div>
 
 	<h1 class="text-center">Détail du pays

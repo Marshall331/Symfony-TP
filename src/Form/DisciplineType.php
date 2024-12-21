@@ -18,6 +18,7 @@ class DisciplineType extends AbstractType
             ->add('nomDis', TextType::class, options: [
                 'label' => 'Nom :',
                 'attr' => ['class' => 'form-control mt-2'],
+                'required' => false
             ])
             ->add('sportDis', TextType::class, options: [
                 'label' => 'Sport :',

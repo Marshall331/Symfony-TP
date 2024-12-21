@@ -5,9 +5,11 @@
 {% endblock %}
 
 {% block body %}
-	<a class="btn btn-outline-primary" href="{{ path('app_discipline_new') }}">
-		<i class="fa-solid fa-plus fa-2xl"></i>&nbsp;Ajouter une discipline
-	</a>
+	{% if is_granted('ROLE_USER') %}
+		<a class="btn btn-outline-primary" href="{{ path('app_discipline_new') }}">
+			<i class="fa-solid fa-plus fa-2xl"></i>&nbsp;Ajouter une discipline
+		</a>
+	{% endif %}
 
 	<div class="text-center">
 		<h1>Liste des disciplines</h1>
@@ -43,9 +45,11 @@
 						<a href="{{ path('app_discipline_show', {'id': discipline.id}) }}" class="btn btn-outline-dark m-1">
 							<i class="fa-solid fa-search fa-lg"></i>
 						</a>
-						<a href="{{ path('app_discipline_edit', {'id': discipline.id}) }}" class="btn btn-outline-info m-1">
-							<i class="fa-solid fa-pen-to-square fa-lg"></i>
-						</a>
+						{% if is_granted('ROLE_USER') %}
+							<a href="{{ path('app_discipline_edit', {'id': discipline.id}) }}" class="btn btn-outline-info m-1">
+								<i class="fa-solid fa-pen-to-square fa-lg"></i>
+							</a>
+						{% endif %}
 					</td>
 				</tr>
 			{% else %}

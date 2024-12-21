@@ -15,7 +15,9 @@
 		<a href="{{ path('app_pays_show', {'id': pays.id }) }}" class="btn btn-outline-dark">
 			<i class="fa-solid fa-search fa-lg"></i>&nbsp;Détail
 		</a>
-		{{ include('pays/_delete_form.html.twig') }}
+		{% if is_granted('ROLE_ADMIN') %}
+			{{ include('pays/_delete_form.html.twig') }}
+		{% endif %}
 	</div>
 
 	<h1 class="text-center">Modifier un pays</h1>

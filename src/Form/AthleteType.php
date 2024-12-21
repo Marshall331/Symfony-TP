@@ -29,7 +29,6 @@ class AthleteType extends AbstractType
                 'label_attr' => ['class' => 'form-label'],
                 'attr' => ['class' => 'form-control mb-2'],
                 'required' => false,
-                'data' => new \DateTimeImmutable(),
             ])
             ->add('photo', TextType::class, options: [
                 'label' => 'Photo :',

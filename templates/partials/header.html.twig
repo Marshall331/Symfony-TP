@@ -38,7 +38,7 @@
 								{{ app.user.email }}
 							</small>
 							<div>
-								<span>
+								<span class="text-success">
 									Connecté en tant que
 								</span>
 								<div>
@@ -52,19 +52,24 @@
 						</div>
 					</li>
 					<li class="nav-item mt-2">
-						<a class="btn btn-outline-danger" href="{{ path('app_logout') }}">
+						<a class="btn btn-outline-danger" href="{{ path('app_jo_logout') }}">
 							<i class="fa-solid fa-sign-out-alt fa-xl"></i>&nbsp;Déconnexion
 						</a>
 					</li>
 				{% else %}
-					<li class="nav-item d-flex mt-3">
-						<a class="btn btn-outline-primary me-2" href="{{ path('app_login') }}">
-							<i class="fa-solid fa-sign-in-alt fa-xl"></i>&nbsp;Connexion
-						</a>
-						<a class="btn btn-outline-secondary" href="{{ path('app_register') }}">
-							<i class="fa-solid fa-user-plus fa-xl"></i>&nbsp;Créer un compte
-						</a>
-					</li>
+					<div>
+						<div class="d-flex align-items-center mt-3 me-2">
+							<span class="text-danger me-3">
+								Vous n'êtes pas connecté
+							</span>
+							<a class="btn btn-outline-primary me-2 {% if app.request.attributes.get('_controller') starts with 'App\\Controller\\SecurityController' %}active{% endif %}" href="{{ path('app_jo_login') }}">
+								<i class="fa-solid fa-sign-in-alt fa-xl"></i>&nbsp;Connexion
+							</a>
+							<a class="btn btn-outline-dark {% if app.request.attributes.get('_controller') starts with 'App\\Controller\\RegistrationController' %}active{% endif %}" href="{{ path('app_jo_register') }}">
+								<i class="fa-solid fa-user-plus fa-xl"></i>&nbsp;Créer un compte
+							</a>
+						</div>
+					</div>
 				{% endif %}
 			</ul>
 		</div>

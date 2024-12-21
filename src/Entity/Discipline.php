@@ -6,6 +6,7 @@ use App\Repository\DisciplineRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: DisciplineRepository::class)]
 class Discipline
@@ -16,6 +17,13 @@ class Discipline
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
+    #[Assert\NotBlank(message: 'Le nom de la discipline ne peut pas être vide.')]
+    #[Assert\Length(
+        min: 5,
+        max: 60,
+        minMessage: 'Le nom de la discipline doit comporter au moins {{ limit }} caractères.',
+        maxMessage: 'Le nom de la discipline ne peut pas dépasser {{ limit }} caractères.'
+    )]
     private ?string $nomDis = null;
 
     #[ORM\Column(length: 40, nullable: true)]

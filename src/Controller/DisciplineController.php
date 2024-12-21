@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/JO/discipline')]
 final class DisciplineController extends AbstractController
@@ -22,6 +23,7 @@ final class DisciplineController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER', message: 'Vous n\'avez pas accès à cette page')]
     #[Route('/new', name: 'app_discipline_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -53,6 +55,7 @@ final class DisciplineController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER', message: 'Vous n\'avez pas accès à cette page')]
     #[Route('/{id}/edit', name: 'app_discipline_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Discipline $discipline, EntityManagerInterface $entityManager): Response
     {
@@ -72,6 +75,7 @@ final class DisciplineController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas accès à cette page')]
     #[Route('/{id}', name: 'app_discipline_delete', methods: ['POST'])]
     public function delete(Request $request, Discipline $discipline, EntityManagerInterface $entityManager): Response
     {

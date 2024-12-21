@@ -6,9 +6,11 @@
 
 {% block body %}
 
-	<a class="btn btn-outline-primary" href="{{ path('app_athlete_new') }}">
-		<i class="fa-solid fa-plus fa-2xl"></i>&nbsp;Ajouter un athlète
-	</a>
+	{% if is_granted('ROLE_USER') %}
+		<a class="btn btn-outline-primary" href="{{ path('app_athlete_new') }}">
+			<i class="fa-solid fa-plus fa-2xl"></i>&nbsp;Ajouter un athlète
+		</a>
+	{% endif %}
 
 	<div class="text-center">
 		<h1>Liste des athlètes</h1>
@@ -23,13 +25,10 @@
 				<th>Id</th>
 				<th>Nom & Prénom</th>
 				<th>Nombre de disciplines</th>
-				<th>Pays</th>
-				<th>Continent</th>
 				<th>Date de naissance</th>
 				<th>Photo</th>
-				<th>Genre</th>
-				<th>Taille (cm)</th>
-				<th>Poids (kg)</th>
+				<th>Pays</th>
+				<th>Continent</th>
 				<th>actions</th>
 			</tr>
 		</thead>
@@ -43,6 +42,10 @@
 					</td>
 					<td>{{ athlete.nomPrenom }}</td>
 					<td>{{ athlete.discipline|length }}</td>
+					<td>{{ athlete.dateNaiss ? athlete.dateNaiss|date('d-m-Y') : '' }}</td>
+					<td>
+						<img src={{ athlete.photo }} width="100" height="100">
+					</td>
 					<td>
 						{% if athlete.pays is not null %}
 							{{ athlete.pays.nomPays }}
@@ -57,20 +60,15 @@
 							-
 						{% endif %}
 					</td>
-					<td>{{ athlete.dateNaiss ? athlete.dateNaiss|date('d-m-Y') : '' }}</td>
-					<td>
-						<img src={{ athlete.photo }} width="100" height="100">
-					</td>
-					<td>{{ athlete.genre }}</td>
-					<td>{{ athlete.taille }}</td>
-					<td>{{ athlete.poids }}</td>
-					<td>
+					<td class="gap-2">
 						<a href="{{ path('app_athlete_show', {'id': athlete.id}) }}" class="btn btn-outline-dark m-1">
 							<i class="fa-solid fa-search fa-lg"></i>
 						</a>
-						<a href="{{ path('app_athlete_edit', {'id': athlete.id}) }}" class="btn btn-outline-info m-1">
-							<i class="fa-solid fa-pen-to-square fa-lg"></i>
-						</a>
+						{% if is_granted('ROLE_USER') %}
+							<a href="{{ path('app_athlete_edit', {'id': athlete.id}) }}" class="btn btn-outline-info m-1">
+								<i class="fa-solid fa-pen-to-square fa-lg"></i>
+							</a>
+						{% endif %}
 					</td>
 				</tr>
 			{% else %}

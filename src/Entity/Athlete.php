@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AthleteRepository::class)]
 class Athlete
@@ -20,6 +21,11 @@ class Athlete
     private ?string $nomPrenom = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Range(
+        min: '1940-07-01',
+        max: 'today',
+        notInRangeMessage: 'La date de naissance doit être comprise entre le {{ min }} et aujourd\'hui.'
+    )]
     private ?\DateTimeImmutable $dateNaiss = null;
 
     #[ORM\Column(length: 255, nullable: true)]

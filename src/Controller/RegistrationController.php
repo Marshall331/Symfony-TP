@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class RegistrationController extends AbstractController
 {
-    #[Route('/register', name: 'app_register')]
+    #[Route('/JO/register', name: 'app_jo_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new MemberJO();
@@ -39,7 +39,7 @@ class RegistrationController extends AbstractController
             // do anything else you need here, like send an email
 
             $this->addFlash('success', message: 'Votre compte a bien été créé, vous pouvez à présent vous connecter !');
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('jo_app_home');
         }
 
         return $this->render('registration/register.html.twig', [

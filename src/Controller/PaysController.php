@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/JO/pays')]
 final class PaysController extends AbstractController
@@ -23,6 +24,7 @@ final class PaysController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER', message: 'Vous n\'avez pas accès à cette page')]
     #[Route('/new', name: 'app_pays_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -54,6 +56,7 @@ final class PaysController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_USER', message: 'Vous n\'avez pas accès à cette page')]
     #[Route('/{id}/edit', name: 'app_pays_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Pays $pays, EntityManagerInterface $entityManager): Response
     {
@@ -73,6 +76,7 @@ final class PaysController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas accès à cette page')]
     #[Route('/{id}', name: 'app_pays_delete', methods: ['POST'])]
     public function delete(Request $request, Pays $pays, AthleteRepository $athleteRepository, EntityManagerInterface $entityManager): Response
     {
