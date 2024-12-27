@@ -15,7 +15,7 @@
 				</li>
 				<li class="nav-item">
 					<a class="nav-link {% if app.request.attributes.get('_controller') starts with 'App\\Controller\\AthleteController' %}active{% endif %}" href="{{path('app_athlete_index')}}">
-						<i class="fa-solid fa-person-running fa-xl"></i>&nbsp;Athletes
+						<i class="fa-solid fa-person-running fa-xl"></i>&nbsp;Athlètes
 					</a>
 				</li>
 				<li class="nav-item">
@@ -39,7 +39,7 @@
 							</small>
 							<div class="d-flex mt-2">
 								<span class="text-success" style="margin-top: 0.12em;">
-									Connecté en tant que&nbsp;&nbsp;
+									Connecté(e) en tant que&nbsp;&nbsp;
 								</span>
 								<div>
 									{% if is_granted('ROLE_ADMIN') %}
@@ -60,7 +60,7 @@
 					<div>
 						<div class="d-flex align-items-center mt-3 me-2">
 							<span class="text-danger me-3">
-								Vous n'êtes pas connecté
+								Vous n'êtes pas connecté(e)
 							</span>
 							<a class="btn btn-outline-primary me-2 {% if app.request.attributes.get('_controller') starts with 'App\\Controller\\SecurityController' %}active{% endif %}" href="{{ path('app_jo_login') }}">
 								<i class="fa-solid fa-sign-in-alt fa-xl"></i>&nbsp;Connexion
