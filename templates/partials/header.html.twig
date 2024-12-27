@@ -37,9 +37,9 @@
 								Bonjour,
 								{{ app.user.email }}
 							</small>
-							<div>
-								<span class="text-success">
-									Connecté en tant que
+							<div class="d-flex mt-2">
+								<span class="text-success" style="margin-top: 0.12em;">
+									Connecté en tant que&nbsp;&nbsp;
 								</span>
 								<div>
 									{% if is_granted('ROLE_ADMIN') %}
